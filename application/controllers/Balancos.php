@@ -70,12 +70,13 @@
 			$data = htmlspecialchars($this->input->post('data'));
 			// $data_formatada = date("d-m-Y", strtotime($this->input->post('data_despesa')));
 			$data_formatada = htmlspecialchars($this->input->post('data_despesa'));
+			$valor_despesa = str_replace(",", ".", htmlspecialchars($this->input->post('valor_despesa')));
 
 			$dados = [
 				"data" 						=> $data_formatada,
 				"nome" 						=> htmlspecialchars($this->input->post('combo_despesa')),
 				"tipo" 						=> "Débito",
-				"valor"						=> htmlspecialchars($this->input->post('valor_despesa'))
+				"valor"						=> $valor_despesa
 			];
 
 			if($dados['data'] == "")
@@ -171,7 +172,7 @@
 				"data_abertura"			=> $gestor[0]["data_abertura"],
 				"data"					=> $data_formatada,
 				"nome"					=> htmlspecialchars($this->input->post('combo_despesa')),
-				"valor"					=> $dados["valor"],
+				"valor"					=> str_replace(",", ".", $dados["valor"]),
 				"tipo"					=> "Débito"
 			];
 
@@ -182,7 +183,7 @@
 			$gestor = $this->db->get()->result_array();
 
 			//Subtrai ao saldo
-			$this->db->set('saldo', 'saldo - '.htmlspecialchars($this->input->post('valor_despesa')), FALSE);
+			$this->db->set('saldo', 'saldo - '.str_replace(",", ".", htmlspecialchars($this->input->post('valor_despesa'))), FALSE);
 			$this->db->update('saldo');
 
 			$this->balanco();
@@ -222,7 +223,7 @@
 				"data" 						=> $data_formatada,
 				"nome" 						=> htmlspecialchars($this->input->post('combo_receita')),
 				"tipo" 						=> "Crédito",
-				"valor"						=> htmlspecialchars($this->input->post('valor_receita'))
+				"valor"						=> str_replace(",", ".", htmlspecialchars($this->input->post('valor_receita')))
 			];
 
 			if($dados['data'] == "")
@@ -318,7 +319,7 @@
 				"data_abertura"			=> $gestor[0]["data_abertura"],
 				"data"					=> $data_formatada,
 				"nome"					=> htmlspecialchars($this->input->post('combo_receita')),
-				"valor"					=> $dados["valor"],
+				"valor"					=> str_replace(",", ".", $dados["valor"]),
 				"tipo"					=> "Crédito"
 			];
 
@@ -329,7 +330,7 @@
 			$gestor = $this->db->get()->result_array();
 
 			//Soma ao saldo
-			$this->db->set('saldo', 'saldo + '.htmlspecialchars($this->input->post('valor_receita')), FALSE);
+			$this->db->set('saldo', 'saldo + '.str_replace(",", ".", htmlspecialchars($this->input->post('valor_receita'))), FALSE);
 			$this->db->update('saldo');
 
 			$this->balanco();
@@ -347,7 +348,7 @@
 				"data" 									=> $data_registo,
 				"data_fecho" 							=> $data_fecho,
 				"nome"									=> htmlspecialchars($this->input->post('combo_despesa')),
-				"valor_despesa"							=> htmlspecialchars($this->input->post('valor_despesa')),
+				"valor_despesa"							=> str_replace(",", ".", htmlspecialchars($this->input->post('valor_despesa'))),
 				"valor_receita"							=> null,
 				"tipo"									=> "Débito"
 			]; 
@@ -409,7 +410,7 @@
 				"data_fecho" 							=> $data_fecho,
 				"nome"									=> htmlspecialchars($this->input->post('combo_receita')),
 				"valor_despesa"							=> null,
-				"valor_receita"							=> htmlspecialchars($this->input->post('valor_receita')),
+				"valor_receita"							=> str_replace(",", ".", htmlspecialchars($this->input->post('valor_receita'))),
 				"tipo"									=> "Crédito"
 			]; 
 

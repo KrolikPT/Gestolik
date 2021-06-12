@@ -23,6 +23,7 @@
 			];
 
 			$valor_saldo = htmlspecialchars($this->input->post('valor_saldo'));
+			$valor_saldo = str_replace(",", ".", $valor_saldo);
 
 			if($valor_saldo == "")
 			{
@@ -350,6 +351,7 @@
 		public function adicionarCredito()
 		{
 			$valor_credito = htmlspecialchars($this->input->post('valor_credito'));
+			$valor_credito = str_replace(",", ".", $valor_credito);
 
 			if($valor_credito == "")
 			{
