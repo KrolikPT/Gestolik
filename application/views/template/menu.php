@@ -6,7 +6,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header text-center">
-                <a href="http://localhost"><h1>Gestolik</h1></a>
+                <a href="<?php echo base_url(); ?>"><h1>Gestolik</h1></a>
             </div>
 
             <ul class="list-unstyled text-center">
