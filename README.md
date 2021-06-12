@@ -1,0 +1,2 @@
+# gestolik
+Software de gerenciamento.
